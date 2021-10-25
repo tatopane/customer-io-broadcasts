@@ -3,8 +3,14 @@ import csv
 import json
 from decouple import config
 
+#### Parameters
+broadcast_id = 1000795
+file_name = 'cl_leads_cashback.csv'
+
+################################# Don't modify below this line
+
 per_user_data = []
-with open('mx_leads_cashback_test.csv', newline='', encoding='latin-1') as csvfile:
+with open(file_name, newline='', encoding='latin-1') as csvfile:
 	reader = csv.reader(csvfile, delimiter=',', quotechar='|')
 	next(reader, None) #skip headers
 	for row in reader:
@@ -21,9 +27,9 @@ headers = {
     }
 
 payload = {"per_user_data": per_user_data, "email_ignore_missing": True, "email_add_duplicates": True}
-print(json.dumps(payload))
+#print(json.dumps(payload))
 
-res = r.post(base_url + endpoint.format(broadcast_id = 1000790), json = payload, headers = headers)
+res = r.post(base_url + endpoint.format(broadcast_id = broadcast_id), json = payload, headers = headers)
 print(res.status_code)
 print(res.json())
 
